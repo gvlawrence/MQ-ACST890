@@ -1,0 +1,83 @@
+---
+title: "ACST890 Test1"
+author: "Greg Lawrence  83186557"
+date: "22 March 2018"
+output:
+  word_document:
+    reference_docx: knitr_template890.docx  
+  html_document: default
+---
+
+##
+Code for questions 1 and 3 can be found in the following GitHub repository:
+[https://github.com/gvlawrence/MQ-ACST890]
+
+T1Q1.R   - contains the raw R code for Q1
+
+T1Q3.R   - contains the raw R code for Q3
+
+T1Q1.Rmd - contains the R Markdown code used to generate the output for Q1
+
+T1Q3.Rmd - contains the R Markdown code used to generate the output for Q3
+
+Note:
+The R code within each Rmd is identical to the corresponding R file, with the R Markdown allowing the output to be interspersed with the code producing it. So reviewers may look at either the .R files, or the code which is fully visible within this document together with the related output.
+
+##
+## ACST890 Test1 Q1 (Code)
+
+```{r T1Q1f}
+
+# fib890 function
+#    inparm: n0 (value to use for n)
+#    output: first n Fibonacci numbers
+
+fib890 <- function(n0){
+  
+  cat("n=",n0,"\n")
+  fibP2=0  # 2nd prior value 
+  fibP1=0  # 1st prior value 
+  fibC=1   # current fib value
+  
+  for (lc in 1:n0) {
+    # separately handle n0 when it is 1
+    if (lc==1) {
+      cat("fib number 1 = 1", "\n")
+    }
+    
+    # recalculate for new value of lc (loop-control)
+    else {
+      fibP2 = fibP1
+      fibP1 = fibC
+      fibC = fibP2 + fibP1
+      cat("fib number",lc,"=",fibC,"\n")
+    }
+  }
+}
+
+```
+
+# ACST890 Test1 Q1 (Test Results)
+
+```{r T1Q1t}
+## test fib890 function for a range of n0 values
+fib890(1)
+
+fib890(4)
+
+fib890(16)
+```
+
+# ACST890 Test1 Q2
+
+The following points may be noted from Mark Pesce's "The Last Days of Reality"
+article:
+
+- Facebook is known to monitor and process the interactions of its users, and certainly it is clear that the advertisements and newsfeed of each user are adjusted based on each user's interactions. 
+
+- The article suggests that Facebook takes this process beyond appropriate boundaries by supposedly "exploiting the weak spots of teenagers" using a process
+termed in ther article as "emotional surveillance". While it is reasonable to accept that some people are more "persuadable" than others, it is also commonly stated that most communication is non-verbal. So the written (ie. verbal) information which Facebook uses in its algorithms is only a partial picture of each user - and the accuracy of the suggested content is still restricted by what each user explicitly shares online.
+
+- The field of Machine Learning has grown exponentially in recent decades. One aspect of Machine Learning which has helped its growth is the ability of machine learning algorithms to learn and improve from mediocre competition. This trait contrasts with elite performance in humans, where commonly improvements in human performance require competing with the very best.
+
+- Facebook uses machine learning technology to a wide extent. In particular, Facebook algorithms aim (often successfully) to learn the optimal content to display on each user's newsfeed to ensure they continue to use the Facebook platform.

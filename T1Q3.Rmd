@@ -1,0 +1,126 @@
+---
+title: "ACST890 Test1 Q3"
+author: "Greg Lawrence  83186557"
+date: "22 March 2018"
+output:
+  word_document:
+    reference_docx: knitr_template890.docx  
+  html_document: default
+---
+
+## ACST890 Test1 Q3 - parts a & b
+
+```{r T1Q3ab, fig.width=6, fig.height=4}
+
+library(lattice)
+library(gridExtra)
+
+# [a] read data into R named as "dataset"
+dataset <- read.csv("../tests/PersonenSchaden.csv", head=T)
+
+# create clm (a shortcut) and delay (difference between repmonth and finmonth)
+clm <- dataset$total
+delay <- dataset$finmonth - dataset$repmonth
+
+# convert coded variables to factors
+dataset[2:10] <- lapply(dataset[2:10], factor)
+
+# [b] various summary stats for "total" variable
+cat("\n\n[b] statistics for settled claim amounts:",
+    "\n\n   mean: ", mean(clm),
+    "\n   variance: ", var(clm),
+    "\n   standard deviation: ", sd(clm),
+    "\n\n   largest: ", max(clm),
+    "\n   smallest: ", min(clm),
+    "\n\n   median: ", median(clm),
+    "\n   bottom quartile: ", summary(clm)[2],
+    "\n   top quartile: ", summary(clm)[5], "\n ")
+```
+
+# ACST890 Test1 Q3 - parts c & d
+
+```{r T1Q3cd, fig.width=6, fig.height=4}
+# [c] histogram for dollar value of claims
+histogram(clm, main="[c] Histogram for dollar value of claims",
+          type="count", breaks=80)
+
+
+# [d] histogram for settlement delay
+histogram(delay, main="[d] Histogram for settlement delay",
+          type="count", breaks=30)
+```
+
+# ACST890 Test1 Q3 - parts e & f1
+
+```{r T1Q3ef, fig.width=6, fig.height=4}
+# [e] histogram for legal representation
+histogram(dataset$legrep, main="\n[e] % Histogram for legal representation")
+
+
+# [f1] histogram for injury code 1
+histogram(dataset$inj1, main="\n[f1] % Histogram for injury code 1")
+```
+
+# ACST890 Test1 Q3 - part f2 (other injury codes)
+
+```{r T1Q3f2, fig.width=8, fig.height=8}
+# [f2] histogram for injury codes 2-5
+h2 = histogram(dataset$inj2)
+h3 = histogram(dataset$inj3)
+h4 = histogram(dataset$inj4)
+h5 = histogram(dataset$inj5)
+grid.arrange(h2,h3,h4,h5, ncol=2, 
+             top="\n [f2] % Histograms for injury codes 2-5")
+```
+
+# ACST890 Test1 Q3 - part g (comments on plots c-f)
+
+- Plot c (histogram of raw claim value) shows the data to be strongly skewed to the right, suggesting a log transformation will be useful to normalize it.
+
+- Plot d (histogram of settlement delay) is mildly skewed to the right, with the peak value of settlement delay seen to be around 6 or 7 days.
+
+- Plot e (histogram of legal representation) shows that for around 63% of claims, legal representation was used.
+
+- Plot f1 (histogram of injury code 1) shows that for over 70% of claims, the coded value for injury-code-1 was 1. This code is listed to be "no injury" so might mean either "negligible injury" or perhaps some sort of property damage (since it is unclear how over 70% of claims for "personal injury" would not actually involve an injury).
+
+- Plot f2 (histograms of injury codes 2-5) also show that a majority of claims have injury codes of 1 (no injury). The totals of the percent values - especially for codes 2, 4 and 5 - do not add up to 100, indicating quite a lot of missing values exists for these fields. Similarly, for injury code 3 the most common value is BLANK (not a valid value), so the data quality for these fields is somewhat poor.
+
+# ACST890 Test1 Q3 - parts h & i
+
+```{r T1Q3h, fig.width=6, fig.height=4}
+# [h] histogram for log of dollar value of claims
+histogram(log(clm), main="[h] Histogram for log dollar value of claims", 
+          type="count", breaks=30)
+```
+
+```{r T1Q3i, fig.width=8, fig.height=4}
+
+# [i] plot of claim size (and log claim size) vs operational time
+par(mfrow=c(1,2), mar=c(4,4,2,2))
+plot(dataset$op_time, clm, cex=0.4)
+plot(dataset$op_time, log(clm), cex=0.4)
+title(main="\n[i] Plots of claim size and log claim size vs op_time",outer=T)
+```
+
+# ACST890 Test1 Q3 - part j (comments on plots h-i)
+
+- Plot h (histogram of LOG claim value) shows the normality of the data to be quite successfully improved by the log transformation (compared to the histogram of the raw data from part c, the histogram for the transformed data is seen to be much more symmetric and bell-shaped).
+- For part i, the plot claim size against op_time makes it difficult to distinguish any potential relationship, due to the extreme right skew for claim value together with increasing variance over op_time.
+- However for the plot of LOG claim size against op_time, a moderate positive relationship between log claim time and op_time is evident (log claim time tends to increase with increasing op_time).
+
+
+####  
+## ACST890 Test1 Q3 - part k
+
+```{r T1Q3k, fig.width=6, fig.height=4}
+# [k] plot of log claim size vs operational time by legrep
+xyplot(log(total) ~ op_time, groups=legrep, data=dataset,
+       type="p",pch=19,cex=0.3, xlab="op time", ylab="log claims",
+       main="[k] plot of log claim size vs operational time",
+       auto.key=list(column=1,space="right",title="leg-rep",cex=0.7,rev=T))
+
+```
+
+#### Comment:
+- It can be seen that claim size is typically HIGHER for claims where legal representation was used (and this is true across the full range of op_time).
+
