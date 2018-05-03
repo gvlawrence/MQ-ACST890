@@ -1,6 +1,13 @@
 #! /bin/bash -v
 # ACST890 - G.Lawrence - 83186557
 # Q2.sh - move files listed in current_list from current dir to ../../new
+#=======================================================================#
+# ../../new is assumed to exist relative to current dir
+#    eg. $BASE/new with current dir $BASE/OLQ2test/runQ2
+#
+# Script prepQ2.sh could be used to set things up for testing Q2.sh:
+#    https://github.com/gvlawrence/MQ-ACST890/blob/master/OLQ2/prepQ2.sh
+#=======================================================================#
 
 ## check whether ../../new exists
 ls -al ../../new
