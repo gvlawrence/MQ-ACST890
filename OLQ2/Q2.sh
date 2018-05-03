@@ -3,7 +3,7 @@
 # Q2.sh - move files listed in current_list from current dir to ../../new
 
 ## check whether ../../new exists
-ls -dl ../../new
+ls -al ../../new
 
 ## check whether current_list and the ?oo files exist
 ls -l ?oo current_list

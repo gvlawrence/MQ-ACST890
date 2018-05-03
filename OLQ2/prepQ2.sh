@@ -1,6 +1,6 @@
 #! /bin/bash
 # ACST890 - G.Lawrence - 83186557
-# Q2prep.sh - prepare files and dirs for Q2
+# prepQ2.sh - prepare files and dirs for Q2
 
 # create directory from which Q2 test will run
 mkdir -p OLQ2test/runQ2

@@ -1,4 +1,4 @@
-#! /bin/bash -v
+#! /bin/bash
 # ACST890 - G.Lawrence - 83186557
 # Q1d.sh - use sed to print out lines 100 to 200
 
@@ -6,5 +6,6 @@
 suff1="20180501"
 if [ $# -ge 1 ]; then suff1=$1; fi
 
-## print lines 100-200 to default output using sed	
+## print lines 100-200 to default output using sed
+echo -e "\n ## print lines 100-200 in my_book_$suff1.txt \n"
 sed -n '100,200p' my_book_$suff1.txt
