@@ -1,4 +1,4 @@
-""" Ass1 Task1 Q4 – GregL 83186557 - T1Q4.py """
+""" Ass1 Task1 Q4 - GregL 83186557 - T1Q4.py """
 
 import sys
 

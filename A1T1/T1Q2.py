@@ -1,9 +1,9 @@
-""" Ass1 Task1 Q2 – GregL 83186557 - T1Q2.py """
+""" Ass1 Task1 Q2 - GregL 83186557 - T1Q2.py """
 
 import random
 import sys
 
-# first parm is number of tosses - just toss once if not suppied 
+# first parm is number of tosses - just toss once if not supplied 
 numtoss = int(sys.argv[1]) if len(sys.argv) >= 2 else 1
 print('numtoss=' + str(numtoss))    
 
